@@ -1,39 +1,81 @@
-# 🧪 Networking Protocols: DHCP & ICMP
+# 8 Implementation of error detection using CRC CCITT [16 bit] technique
 
-## 📘 Overview
-This resource introduces two essential networking protocols—DHCP and ICMP—through concise video explainers. Ideal for flipped classroom activities, lab prep, or independent study.
+# CRC-16 Bit Error Detection Lab
 
+## 🧠 AIM
+To write a program for error detection using the Cyclic Redundancy Check (CRC-16 bit) technique.
+
+## 🛠️ EQUIPMENTS REQUIRED
+1. Personal Computer  
+2. C++ Compiler
+
+## 📋 ALGORITHM
+1. Open Code::Blocks application and create a new file.  
+2. Type the code provided below.  
+3. Save the file with a `.c` extension in the desired location.  
+4. Run the program using **Build and Run**.  
+5. Provide polynomial values to generate the output polynomial using the CRC error detection technique.  
+6. The output polynomial is obtained through this technique.
+
+## 💻 PROGRAM
+
+```c
+#include<stdio.h>
+#include<string.h>
+#define Nstrlen(g)
+
+char t[128], cs[128], g[] = "111";
+int a, e, c;
+
+void xor() {
+    for(c = 1; c < N; c++)
+        cs[c] = ((cs[c] == g[c]) ? '0' : '1');
+}
+
+void crc() {
+    for(e = 0; e < N; e++)
+        cs[e] = t[e];
+    do {
+        if(cs[0] == '1')
+            xor();
+        for(c = 0; c < N - 1; c++)
+            cs[c] = cs[c + 1];
+        cs[c] = t[e++];
+    } while(e <= a + N - 1);
+}
+
+void main() {
+    printf("\nEnter poly: ");
+    scanf("%s", t);
+    printf("\nGen poly is: %s", g);
+    a = strlen(t);
+    for(e = a; e < a + N - 1; e++)
+        t[e] = '0';
+    printf("\nModified t[u]: %s", t);
+    crc();
+    printf("\nChecksum is: %s", cs);
+    for(e = a; e < a + N - 1; e++)
+        t[e] = cs[e - a];
+    printf("\nFinal code word is: %s", t);
+    printf("\nTest error detection 0(yes) 1(no)?: ");
+    scanf("%d", &e);
+    if(e == 0) {
+        printf("Enter position where error is to be inserted: ");
+        scanf("%d", &e);
+        t[e] = (t[e] == '0') ? '1' : '0';
+        printf("Erroneous data: %s\n", t);
+    }
+    crc();
+    for(e = 0; (e < N - 1) && (cs[e] != '1'); e++);
+    if(e < N - 1)
+        printf("Error detected");
+    else
+        printf("No error detected");
+
+## OUTPUT
 ---
+<img width="724" height="358" alt="image" src="https://github.com/user-attachments/assets/d74fad42-1038-41a8-98c6-2620b8f28474" />
 
-## 🛠️ DHCP: Dynamic Host Configuration Protocol
-- **Video Title:** What Is DHCP? How Does DHCP Work? Why Is It Important? | Fortinet  
-- **Link:** [Watch on YouTube](https://youtu.be/p6xAoZ9hzFE?feature=shared)
 
-### 🔎 Key Concepts
-- Automates IP address assignment to devices on a network
-- Reduces manual configuration errors
-- Supports scalability and dynamic network management
+}
 
----
-
-## 📡 ICMP: Internet Control Message Protocol
-- **Video Title:** What is ICMP (Internet Control Message Protocol)? | Fortinet  
-- **Link:** [Watch on YouTube](https://youtu.be/vJV-GBZ6PeM?feature=shared)
-
-### 🔎 Key Concepts
-- Used for error reporting and diagnostics (e.g., ping, traceroute)
-- Helps identify unreachable hosts and network latency
-- Operates within the network layer of the OSI model
-
----
-
-## ✅ Suggested Use
-- Assign each video as pre-class material
-- Use content to scaffold lab sheets or formative quizzes
-- Encourage students to diagram protocol workflows and packet exchanges
-
----
-
-*Designed for experiential learning in communication networks.*
-# LATHA-1
-DR LATHA
